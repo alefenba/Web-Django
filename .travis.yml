@@ -3,8 +3,6 @@ dist: xenial
 sudo: true
 
 python: 
-  - 3.7
-  - 3.8
   - 3.9
 
 env:
@@ -17,5 +15,6 @@ install:
   - pipenv sync -d
 
 script:
-  - pipenv shell
+  - pipenv shell 
   - flake8
+  - pytest
