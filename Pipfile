@@ -8,10 +8,14 @@ django = "*"
 flake8 = "*"
 gunicorn = "*"
 pytest-django ="*"
+python-decouple = "*"
+jedi = "==0.17.2"
 
 [dev-packages]
 flake8 = "*"
 pytest-django = "*"
+pytest-cov = "*"
+codecov = "*"
 
 [requires]
 python_version = "3.9"
