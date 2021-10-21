@@ -9,10 +9,13 @@ https://docs.djangoproject.com/en/3.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
-from functools import partial
-import dj_database_url
 import os
+from functools import partial
+
+import dj_database_url
+import sentry_sdk
 from decouple import Csv, config
+from sentry_sdk.integrations.django import DjangoIntegration
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -74,12 +77,12 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'pypro.wsgi.application'
 
-#configuração Django Debug Toolbar
-INTERNAL_IPS=config('INTERNAL_IPS',cast=Csv(),default='127.0.0.1')
+# Configuração Django Debug Toolbar
+INTERNAL_IPS = config('INTERNAL_IPS', cast=Csv(), default='127.0.0.1')
 
 if DEBUG:
     INSTALLED_APPS.append('debug_toolbar')
-    MIDDLEWARE.insert(0,'debug_toolbar.middleware.DebugToolbarMiddleware')
+    MIDDLEWARE.insert(0, 'debug_toolbar.middleware.DebugToolbarMiddleware')
 
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
@@ -149,18 +152,17 @@ if AWS_ACCESS_KEY_ID:  # pragma: no cover
     AWS_QUERYSTRING_AUTH = True
     AWS_S3_CUSTOM_DOMAIN = None
     AWS_DEFAULT_ACL = 'private'
-    
-    
+
     # static assets
     STATICFILES_STORAGE = 's3_folder_storage.s3.StaticStorage'
     STATIC_S3_PATH = 'static'
     STATIC_ROOT = f'/{STATIC_S3_PATH}/'
     STATIC_URL = f'//s3.amazonaws.com/{AWS_STORAGE_BUCKET_NAME}/{STATIC_S3_PATH}/'
     ADMIN_MEDIA_PREFIX = STATIC_URL + 'admin/'
-    
+
     # Upload Media Folder
     DEFAULT_FILE_STORAGE = 's3_folder_storage.s3.DefaultStorage'
-    DEFAULT_S3_PATH = 'media' 
+    DEFAULT_S3_PATH = 'media'
     MEDIA_ROOT = f'/{DEFAULT_S3_PATH}/'
     MEDIA_URL = f'//s3.amazonaws.com/{AWS_STORAGE_BUCKET_NAME}/{DEFAULT_S3_PATH}/'
 
@@ -170,3 +172,8 @@ if AWS_ACCESS_KEY_ID:  # pragma: no cover
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+SENTRY_DSN = config('SENTRY_DSN', default=None)
+
+if SENTRY_DSN:
+    sentry_sdk.init(dsn=SENTRY_DSN, integrations=[DjangoIntegration()])
