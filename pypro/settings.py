@@ -138,12 +138,13 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'mediafiles')
 
-COLLECTFAST_ENABLED = True
+COLLECTFAST_ENABLED = False
 
 AWS_ACCESS_KEY_ID = config('AWS_ACCESS_KEY_ID')
 
 if AWS_ACCESS_KEY_ID:  # pragma: no cover
     COLLECTFAST_ENABLED = True
+    COLLECTFAST_STRATEGY = "collectfast.strategies.boto3.Boto3Strategy"
     AWS_SECRET_ACCESS_KEY = config('AWS_SECRET_ACCESS_KEY')
     AWS_STORAGE_BUCKET_NAME = config('AWS_STORAGE_BUCKET_NAME')
     AWS_S3_OBJECT_PARAMETERS = {'CacheControl': 'max-age=86400', }
@@ -170,7 +171,6 @@ if AWS_ACCESS_KEY_ID:  # pragma: no cover
     INSTALLED_APPS.append('storages')
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
-
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 SENTRY_DSN = config('SENTRY_DSN', default=None)
