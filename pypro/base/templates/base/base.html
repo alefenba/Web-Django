@@ -31,30 +31,9 @@
 		</div>
 	</nav>
 
-	{% block body %} {% endblock body %}
+{% block body %} {% endblock body %}
 
-	<footer class="main-footer mt-5 pt-4 text-light ">
-		<div class="container">
-			<div class="row">
-				<div class="col">
-					<h3>Entre em contato</h3>
-					<address>
-						+55 12 997411854
-						<br/>
-						<a href="mailto:ramalho@python.pro.br" class="text-light">ramalho@python.pro.br</a>
-					</address>
-				</div>
-			</div>
-		</div>
-		<div class="rights pb-4 text-light" >
-			<div class="container">
-				<div class="row">
-					<div class="col">
-						{% now 'Y' %} Python Pro. Todos direitos reservados.
-					</div>
-				</div>
-			</div>
-		</div>
-	</footer>
-  </body>
+{% include 'base/footer.html' with contato_email='ramalho@python.pro.br' only %}
+
+</body>
 </html>
