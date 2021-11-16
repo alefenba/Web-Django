@@ -5,3 +5,7 @@ db.sqlite3
 .env
 staticfiles
 aws.txt
+.pytest_cache
+# postgres files for local development
+
+.pgdata
