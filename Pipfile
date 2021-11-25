@@ -15,6 +15,7 @@ django-s3-folder-storage = "*"
 collectfast = "*"
 sentry-sdk = "*"
 django-debug-toolbar = "*"
+django-ordered-model = "*"
 
 [dev-packages]
 flake8 = "*"
