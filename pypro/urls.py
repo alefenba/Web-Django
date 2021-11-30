@@ -18,9 +18,10 @@ from django.contrib import admin
 from django.urls import path, include
 
 urlpatterns = [
+    path('admin/', admin.site.urls),
     path('', include('pypro.base.urls')),
     path('aperitivos/', include('pypro.aperitivos.urls')),
-    path('admin/', admin.site.urls)
+    path('modulos/', include('pypro.modulos.urls')),
 ]
 
 if settings.DEBUG:
