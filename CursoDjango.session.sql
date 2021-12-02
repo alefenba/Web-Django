@@ -1,0 +1,1 @@
+SELECT m.id, m.titulo, a.id, a.titulo, a.modulo_id FROM modulos_modulo AS m JOIN modulos_aula a on m.id = a.modulo_id where m.id=1;
