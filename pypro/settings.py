@@ -11,7 +11,6 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 import os
 from functools import partial
-
 import dj_database_url
 import sentry_sdk
 from decouple import Csv, config
@@ -48,6 +47,7 @@ INSTALLED_APPS = [
     'pypro.aperitivos',
     'pypro.modulos',
     'ordered_model',
+    'django_extensions',
 ]
 
 MIDDLEWARE = [
