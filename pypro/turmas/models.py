@@ -6,4 +6,14 @@ class Turma(models.Model):
     slug = models.SlugField(max_length=64)
     inicio = models.DateField()
     fim = models.DateField()
-    matriculas = models.ManyToManyField(get_user_model())
+    alunos = models.ManyToManyField(get_user_model(), through='Matricula')
+
+
+class Matricula(models.Model):
+    data = models.DateTimeField(auto_now_add=True)
+    usuario = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
+    turma = models.ForeignKey(Turma, on_delete=models.CASCADE)
+
+    class Meta:
+        unique_together = [['usuario', 'turma']]
+        ordering = ['turma', 'data']
