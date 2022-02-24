@@ -19,6 +19,7 @@ django-ordered-model = "*"
 ipython = "*"
 django-extensions = "*"
 pip = "*"
+pytest = "*"
 
 [dev-packages]
 flake8 = "*"
@@ -26,6 +27,7 @@ pytest-django = "*"
 pytest-cov = "*"
 codecov = "*"
 model-bakery = "*"
+pytest = "*"
 
 [requires]
 python_version = "3.9"
