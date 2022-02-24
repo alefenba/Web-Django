@@ -8,7 +8,7 @@ class MatriculaInLine(admin.TabularInline):
     extra = 1
     readonly_fields =('data',)
     autocomplete_fields=('usuario',)
-    ordering = ("-data")
+    ordering = ('-data',)
 
 @admin.register(Turma)
 class TurmaAdmin(admin.ModelAdmin):
